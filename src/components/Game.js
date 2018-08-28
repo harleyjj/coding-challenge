@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {startGame} from '../actions/game';
+import Board from './Board';
 
 
 class Game extends Component {
@@ -21,13 +22,7 @@ class Game extends Component {
                 </div>
             );
         }
-        return (
-            <div className="Game">
-                <p className="App-intro">
-                    Play Now!
-                </p>
-            </div>
-        );
+        return <Board />;
     }
 }
 

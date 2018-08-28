@@ -15,9 +15,12 @@ class Board extends Component {
         }
 
         if (this.props.error) {
-            return <strong className="Error-message">{this.props.error.message}</strong>;
+            return <strong className="Error-message">{JSON.stringify(this.props.error)}</strong>;
         }
-
+        if (this.props.words.length > 0) {
+            const currentWord = this.props.words[Math.floor(Math.random() * this.props.words.length)];
+            return <strong className="Word">{currentWord}</strong>
+        }
         return <p className="App-failed">No Results</p>
     }
 
@@ -33,6 +36,7 @@ class Board extends Component {
 const mapStateToProps = state => ({
     loading: state.word.loading,
     error: state.word.error,
+    words: state.word.words,
 });
 
 export default connect(mapStateToProps)(Board);

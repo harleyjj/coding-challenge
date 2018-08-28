@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {startGame} from '../actions/game';
+import {fetchWords} from '../actions/word';
 import Board from './Board';
 
 
 class Game extends Component {
     start() {
-        this.props.dispatch(startGame());
+        this.props.dispatch(fetchWords());
       }
 
     render() {

@@ -1,5 +1,5 @@
 import {API_BASE_URL} from '../config';
-import {normalizeResponseErrors} from './utils';
+import {startGame} from './game';
 
 export const FETCH_WORDS_REQUEST = 'FETCH_WORDS_REQUEST';
 export const fetchWordsRequest = () => ({
@@ -20,13 +20,13 @@ export const fetchWordsError = error => ({
 
 export const fetchWords = () => dispatch => {
     dispatch(fetchWordsRequest());
+    dispatch(startGame());
     return (
-        fetch(API_BASE_URL, {
+        fetch(`https://cors-anywhere.herokuapp.com/${API_BASE_URL}`, {
             method: 'GET'
         })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => res.json())
-        .then(data => dispatch(fetchWordsSuccess(data)))
+        .then(res => res.text())
+        .then(data => dispatch(fetchWordsSuccess(data.split('\n'))))
         .catch(err => {
             dispatch(fetchWordsError(err));
         })

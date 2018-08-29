@@ -29,7 +29,11 @@ export const fetchWords = () => dispatch => {
         .then(data => {
             const wordsArray = data.split('\n');
             const firstWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
-            dispatch(setWord(firstWord));
+            let displayHint = '';
+            for (let i = 0; i < firstWord.length; i++) {
+                displayHint += '_ '
+            }
+            dispatch(setWord(firstWord, displayHint.trim()));
             dispatch(fetchWordsSuccess(wordsArray));
         })
         .catch(err => {

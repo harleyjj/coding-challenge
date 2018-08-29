@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Field, reduxForm, focus} from 'redux-form';
+import {Field, reduxForm, focus, reset} from 'redux-form';
 import { connect } from 'react-redux';
 import Input from './Input';
-import {guessLetter} from '../actions/game';
+import {makeGuess} from '../actions/game';
 import {required, nonEmpty, singleLetter} from '../validators';
 
 export class GuessForm extends Component {
@@ -19,7 +19,7 @@ export class GuessForm extends Component {
         if (this.props.guesses.includes(guess)) {
            this.setState({notUnique:'You already guessed that!'}); 
         } else {
-            this.props.dispatch(guessLetter(guess));
+            this.props.dispatch(makeGuess(guess));
             this.setState({notUnique: ''});
         }
     }
@@ -59,10 +59,14 @@ const mapStateToProps = state => ({
     guesses: state.game.guesses,
 });
 
+const afterSubmit = (result, dispatch) =>
+    dispatch(reset('guess'));
+
 GuessForm = reduxForm({
     form: 'guess',
     onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('guess', Object.keys(errors)[0]))
+        dispatch(focus('guess', Object.keys(errors)[0])),
+    onSubmitSuccess: afterSubmit,
 })(GuessForm);
 
 export default connect(mapStateToProps)(GuessForm);

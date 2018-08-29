@@ -1,5 +1,5 @@
 import {API_BASE_URL} from '../config';
-import {startGame} from './game';
+import {startGame, setWord} from './game';
 
 export const FETCH_WORDS_REQUEST = 'FETCH_WORDS_REQUEST';
 export const fetchWordsRequest = () => ({
@@ -26,7 +26,12 @@ export const fetchWords = () => dispatch => {
             method: 'GET'
         })
         .then(res => res.text())
-        .then(data => dispatch(fetchWordsSuccess(data.split('\n'))))
+        .then(data => {
+            const wordsArray = data.split('\n');
+            const firstWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
+            dispatch(setWord(firstWord));
+            dispatch(fetchWordsSuccess(wordsArray));
+        })
         .catch(err => {
             dispatch(fetchWordsError(err));
         })

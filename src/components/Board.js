@@ -18,8 +18,7 @@ class Board extends Component {
             return <strong className="Error-message">{JSON.stringify(this.props.error)}</strong>;
         }
         if (this.props.words.length > 0) {
-            const currentWord = this.props.words[Math.floor(Math.random() * this.props.words.length)];
-            return <strong className="Word">{currentWord}</strong>
+            return <strong className="Word">{this.props.currentWord}</strong>
         }
         return <p className="App-failed">No Results</p>
     }
@@ -37,6 +36,7 @@ const mapStateToProps = state => ({
     loading: state.word.loading,
     error: state.word.error,
     words: state.word.words,
+    currentWord: state.game.currentWord,
 });
 
 export default connect(mapStateToProps)(Board);

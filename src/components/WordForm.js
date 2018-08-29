@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {Field, reduxForm, focus, reset} from 'redux-form';
 import { connect } from 'react-redux';
 import Input from './Input';
-import {makeGuess} from '../actions/game';
-import {required, nonEmpty, singleLetter} from '../validators';
+import {guessAnswer} from '../actions/game';
+import {required, nonEmpty, noSpaces} from '../validators';
 
-export class GuessForm extends Component {
+export class WordForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,15 +16,13 @@ export class GuessForm extends Component {
     onSubmit(values) {
         let{guess} = values;
         guess = guess.toLowerCase();
-        if (this.props.guesses.includes(guess)) {
+        if (this.props.notAnswers.includes(guess)) {
            this.setState({notUnique:'You already guessed that!'}); 
         } else {
-            this.props.dispatch(makeGuess(guess));
+            this.props.dispatch(guessAnswer(guess));
             this.setState({notUnique: ''});
         }
     }
-
-    
 
     render() {
         let notUnique;
@@ -33,21 +31,21 @@ export class GuessForm extends Component {
         }
         return (
             <form
-                className="Guess-form"
+                className="Word-form"
                 onSubmit={this.props.handleSubmit(values =>
                 this.onSubmit(values)
                 )}>
-                <label htmlFor="guess">Guess a letter!</label>
+                <label htmlFor="guess">Think you know the solution?</label>
                 <Field
                     component={Input}
                     type="text"
                     name="guess"
-                    validate={[required, nonEmpty, singleLetter]}
+                    validate={[required, nonEmpty, noSpaces]}
                 />
                 <button
                     type="submit"
                     disabled={this.props.pristine || this.props.submitting}>
-                    Submit Guess
+                    Guess the Answer
                 </button>
                 {notUnique}
             </form>
@@ -56,17 +54,17 @@ export class GuessForm extends Component {
 }
 
 const mapStateToProps = state => ({
-    guesses: state.game.guesses,
+    notAnswers: state.game.notAnswers,
 });
 
 const afterSubmit = (result, dispatch) =>
-    dispatch(reset('guess'));
+    dispatch(reset('word'));
 
-GuessForm = reduxForm({
-    form: 'guess',
+WordForm = reduxForm({
+    form: 'word',
     onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('guess', Object.keys(errors)[0])),
+        dispatch(focus('word', Object.keys(errors)[0])),
     onSubmitSuccess: afterSubmit,
-})(GuessForm);
+})(WordForm);
 
-export default connect(mapStateToProps)(GuessForm);
+export default connect(mapStateToProps)(WordForm);

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Spinner from 'react-spinkit';
-import GuessForm from './GuessForm';
+import LetterForm from './LetterForm';
+import WordForm from './WordForm';
 import {resetGame} from '../actions/game';
 
 
@@ -29,14 +30,22 @@ class Board extends Component {
             const displayGuesses = this.props.guesses.map((g, index) => {
                 return <li key={g}>{g}</li>
             })
+            console.log(this.props.notAnswers);
+            const wrongAnswers = this.props.notAnswers.map((w, index) => {
+                return <li key={w}>{w}</li>
+            })
             console.log(this.props.currentWord);
+            console.log(this.props.gameState);
             return (
                 <div className="Play">
                     <strong className="Word">{this.props.displayHint}</strong>
-                    <GuessForm />
+                    <LetterForm />
+                    <WordForm />
                     <strong className="Guesses-left">{`You have ${this.props.guessesRemaining} chances left to guess incorrectly.`}</strong>
                     <h2>Letters you already guessed:</h2>
                     <ul>{displayGuesses}</ul>
+                    <h2>These are NOT the answers:</h2>
+                    <ul>{wrongAnswers}</ul>
                 </div>
             );
         }
@@ -62,6 +71,8 @@ const mapStateToProps = state => ({
     lost: state.game.lost,
     displayHint: state.game.displayHint,
     guessesRemaining: state.game.guessesRemaining,
+    gameState: state.game,
+    notAnswers: state.game.notAnswers,
 });
 
 export default connect(mapStateToProps)(Board);

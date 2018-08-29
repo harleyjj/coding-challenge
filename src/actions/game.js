@@ -17,6 +17,13 @@ export const guessLetter = (guess, displayHint, guessesRemaining) => ({
     guessesRemaining,
 });
 
+export const GUESS_WORD = 'GUESS_WORD';
+export const guessWord = (guess, guessesRemaining) => ({
+    type: GUESS_WORD,
+    guess,
+    guessesRemaining,
+});
+
 export const SET_WORD = 'SET_WORD';
 export const setWord = (word, displayHint) => ({
     type: SET_WORD,
@@ -36,14 +43,13 @@ export const winGame = () => ({
 
 export const makeGuess = guess => (dispatch, getState) => {
     let displayHint = '';
-    let goodGuesses = {};
     let missing = false;
     const currentWord = getState().game.currentWord;
+    let guessesRemaining = getState().game.guessesRemaining;
     const guesses = [...getState().game.guesses, guess];
     for(let i = 0; i < currentWord.length; i++){
         if(guesses.includes(currentWord[i])) {
             displayHint += `${currentWord[i]} `;
-            goodGuesses[currentWord[i]] = 1;
         } else {
             displayHint += '_ ';
             missing = true;
@@ -53,12 +59,28 @@ export const makeGuess = guess => (dispatch, getState) => {
         dispatch(winGame());
         return;
     }
-    let guessesRemaining = 6 - (guesses.length - Object.keys(goodGuesses).length);
+    if(!displayHint.includes(guess)){
+        guessesRemaining -= 1;
+    }
     if (guessesRemaining < 1) {
         dispatch(loseGame());
         return;
     }
     dispatch(guessLetter(guess, displayHint.trim(), guessesRemaining));
+}
+
+export const guessAnswer = guess => (dispatch, getState) => {
+    const currentWord = getState().game.currentWord;
+    if (currentWord === guess) {
+        dispatch(winGame());
+        return;
+    }
+    let guessesRemaining = getState().game.guessesRemaining - 1;
+    if (guessesRemaining < 1) {
+        dispatch(loseGame());
+        return;
+    }
+    dispatch(guessWord(guess, guessesRemaining));
 }
 
 export const resetGame = () => (dispatch, getState) => {

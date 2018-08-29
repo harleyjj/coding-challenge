@@ -1,6 +1,7 @@
 import {
     START_GAME,
     GUESS_LETTER,
+    GUESS_WORD,
     SET_WORD,
     WIN_GAME,
     LOSE_GAME,
@@ -15,6 +16,7 @@ const initialState = {
     won: false,
     displayHint: '',
     guessesRemaining: 6,
+    notAnswers: [],
 }
 
 export default function reducer(state = initialState, action) {
@@ -28,6 +30,12 @@ export default function reducer(state = initialState, action) {
             ...state,
             guesses: [...state.guesses, action.guess],
             displayHint: action.displayHint,
+            guessesRemaining: action.guessesRemaining,
+        }
+    } else if (action.type === GUESS_WORD) {
+        return {
+            ...state,
+            notAnswers: [...state.notAnswers, action.guess],
             guessesRemaining: action.guessesRemaining,
         }
     } else if (action.type === SET_WORD) {
@@ -53,6 +61,7 @@ export default function reducer(state = initialState, action) {
             lost: false,
             won: false,
             guessesRemaining: 6,
+            notAnswers: [],
         }
     }
     return state;

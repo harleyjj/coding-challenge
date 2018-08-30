@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {fetchWords} from '../actions/word';
 import Board from './Board';
 import StartForm from './StartForm';
+import './Game.css';
 
 
 class Game extends Component {

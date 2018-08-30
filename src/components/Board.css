@@ -1,0 +1,19 @@
+.Letter-form {
+    float:left;
+    width:45%;
+}
+
+.Word-form {
+    float:right;
+    width:45%
+}
+
+.indicators {
+    padding-top:20px;
+}
+
+.tallies {
+    float:left;
+    width: 100%;
+    text-align: left;
+}

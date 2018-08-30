@@ -3,7 +3,7 @@ import {Field, reduxForm, focus, reset} from 'redux-form';
 import { connect } from 'react-redux';
 import Input from './Input';
 import {makeGuess} from '../actions/game';
-import {required, nonEmpty, singleLetter} from '../validators';
+import {required, singleLetter} from '../validators';
 
 export class LetterForm extends Component {
     constructor(props) {
@@ -37,12 +37,12 @@ export class LetterForm extends Component {
                 onSubmit={this.props.handleSubmit(values =>
                 this.onSubmit(values)
                 )}>
-                <label htmlFor="guess">Guess a letter!</label>
                 <Field
                     component={Input}
                     type="text"
                     name="guess"
-                    validate={[required, nonEmpty, singleLetter]}
+                    label="Guess a letter!"
+                    validate={[required, singleLetter]}
                 />
                 <button
                     type="submit"

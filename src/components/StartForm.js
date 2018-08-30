@@ -39,32 +39,34 @@ export class StartForm extends Component {
                 onSubmit={this.props.handleSubmit(values =>
                 this.onSubmit(values)
                 )}>
+                <div className="form-input">
                 <label htmlFor="difficulty">Choose level of difficulty (Optional)</label>
-                <Field component="select" name="difficulty">
-                    <option></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </Field>
-                <label htmlFor="minLength">Choose a minimum number of letters (Optional)</label>
+                    <Field component="select" name="difficulty">
+                        <option></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </Field>
+                </div>
                 <Field
                     component={Input}
                     type="text"
                     name="minLength"
+                    label="Choose a minimum number of letters (Optional)"
                     validate={[positiveInteger]}
                 />
-                <label htmlFor="maxLength">Choose a maximum number of letters (Optional)</label>
                 <Field
                     component={Input}
                     type="text"
                     name="maxLength"
+                    label="Choose a maximum number of letters (Optional)"
                     validate={[positiveInteger]}
                 />
                 <button

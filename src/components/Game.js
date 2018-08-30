@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {fetchWords} from '../actions/word';
 import Board from './Board';
+import StartForm from './StartForm';
 
 
 class Game extends Component {
@@ -18,7 +19,7 @@ class Game extends Component {
                         the word.  If you guess 6 letters that are not in the word, you lose!
                         To get started, click the button below.  Good luck!
                     </p>
-                    <button onClick={() => this.start()}><h2>Start</h2></button>
+                    <StartForm />
                 </div>
             );
         }

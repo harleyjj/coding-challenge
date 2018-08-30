@@ -3,12 +3,16 @@ import {connect} from 'react-redux';
 import Spinner from 'react-spinkit';
 import LetterForm from './LetterForm';
 import WordForm from './WordForm';
-import {resetGame} from '../actions/game';
+import {resetGame, tryAgain} from '../actions/game';
 
 
 class Board extends Component {
     resetGame() {
         this.props.dispatch(resetGame());
+    }
+
+    tryAgain() {
+        this.props.dispatch(tryAgain());
     }
 
     renderBoard() {
@@ -25,7 +29,7 @@ class Board extends Component {
         if (this.props.lost) {
             return <button onClick={()=>this.resetGame()}><strong>You lost! Click to play again!</strong></button>
         }
-        if (this.props.words.length > 0) {
+        if (this.props.words.length > 1) {
             console.log(this.props.guesses);
             const displayGuesses = this.props.guesses.map((g, index) => {
                 return <li key={g}>{g}</li>
@@ -49,7 +53,12 @@ class Board extends Component {
                 </div>
             );
         }
-        return <p className="App-failed">No Results</p>
+        return (
+            <div className="App-failed">
+                <p><strong className="No-results">Constraints were too strict - try searching again with less restrictions</strong></p>
+                <button onClick={()=>this.tryAgain()}><h2>Go Back</h2></button>
+            </div>
+        );
     }
 
     render() {

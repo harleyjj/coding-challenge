@@ -6,6 +6,7 @@ import {
     WIN_GAME,
     LOSE_GAME,
     NEW_GAME,
+    TRY_AGAIN
 } from '../actions/game';
 
 const initialState = {
@@ -60,6 +61,18 @@ export default function reducer(state = initialState, action) {
             guesses: [],
             lost: false,
             won: false,
+            guessesRemaining: 6,
+            notAnswers: [],
+        }
+    } else if (action.type === TRY_AGAIN) {
+        return {
+            ...state,
+            welcome: true,
+            guesses: [],
+            currentWord: '',
+            lost: false,
+            won: false,
+            displayHint: '',
             guessesRemaining: 6,
             notAnswers: [],
         }

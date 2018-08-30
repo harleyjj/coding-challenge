@@ -3,6 +3,11 @@ export const startGame = () => ({
     type: START_GAME
 });
 
+export const TRY_AGAIN = 'TRY_AGAIN';
+export const tryAgain = () => ({
+    type: TRY_AGAIN
+});
+
 export const NEW_GAME = 'NEW_GAME';
 export const newGame = () => ({
     type: NEW_GAME

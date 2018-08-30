@@ -15,6 +15,15 @@ export const length = length => value => {
     }
 };
 
+export const positiveInteger = value => {
+    if (!value) {
+        return undefined;
+    }
+    const n = Math.floor(Number(value));
+    return n !== Infinity && String(n) === value && n > 0 ? undefined : 'Must be an integer greater than 0';
+}
+
+
 export const noSpaces = value => 
     value.replace(/\s/g,'') === value ? undefined : 'Must be one word with no spaces';
 

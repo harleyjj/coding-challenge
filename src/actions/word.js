@@ -18,11 +18,25 @@ export const fetchWordsError = error => ({
     error
 });
 
-export const fetchWords = () => dispatch => {
+export const fetchWords = values => dispatch => {
     dispatch(fetchWordsRequest());
     dispatch(startGame());
+    const {difficulty, minLength, maxLength} = values;
+    const parameters = {difficulty, minLength, maxLength};
+    let queryString = '';
+    const keys = Object.keys(parameters);
+    for (let i = 0; i < keys.length; i++){
+        if(parameters[keys[i]]){
+            if(queryString === '') {
+                queryString += `?${keys[i]}=${parameters[keys[i]]}`
+            } else {
+                queryString += `&${keys[i]}=${parameters[keys[i]]}`
+            }
+        }
+    }
+    console.log(queryString);
     return (
-        fetch(`https://cors-anywhere.herokuapp.com/${API_BASE_URL}`, {
+        fetch(`https://cors-anywhere.herokuapp.com/${API_BASE_URL + queryString}`, {
             method: 'GET'
         })
         .then(res => res.text())

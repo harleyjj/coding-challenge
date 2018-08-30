@@ -32,6 +32,9 @@ export const matches = field => (value, allValues) =>
         ? undefined
         : 'Does not match';
 
+export const notANumber = value => 
+    /^[a-z]+$/i.test(value) ? undefined : 'Must consist of letters only';
+
 export const singleLetter = value =>
     value.length === 1 && value.match(/[a-z]/i) ? undefined : 'Must be a single letter';
 

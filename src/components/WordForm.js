@@ -3,7 +3,7 @@ import {Field, reduxForm, focus, reset} from 'redux-form';
 import { connect } from 'react-redux';
 import Input from './Input';
 import {guessAnswer} from '../actions/game';
-import {required, nonEmpty, noSpaces} from '../validators';
+import {required, nonEmpty, noSpaces, notANumber} from '../validators';
 
 export class WordForm extends Component {
     constructor(props) {
@@ -40,7 +40,7 @@ export class WordForm extends Component {
                     component={Input}
                     type="text"
                     name="guess"
-                    validate={[required, nonEmpty, noSpaces]}
+                    validate={[required, nonEmpty, noSpaces, notANumber]}
                 />
                 <button
                     type="submit"

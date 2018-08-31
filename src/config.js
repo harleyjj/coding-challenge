@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'http://app.linkedin-reach.io/words';
+export const API_BASE_URL = 'https://reach-hangman-server.herokuapp.com/words';

@@ -28,15 +28,15 @@ export const fetchWords = values => dispatch => {
     for (let i = 0; i < keys.length; i++){
         if(parameters[keys[i]]){
             if(queryString === '') {
-                queryString += `?${keys[i]}=${parameters[keys[i]]}`
+                queryString += `?${keys[i]}=${parameters[keys[i]]}`;
             } else {
-                queryString += `&${keys[i]}=${parameters[keys[i]]}`
+                queryString += `&${keys[i]}=${parameters[keys[i]]}`;
             }
         }
     }
     //console.log(queryString);
     return (
-        fetch(`https://cors-anywhere.herokuapp.com/${API_BASE_URL + queryString}`, {
+        fetch(API_BASE_URL + queryString, {
             method: 'GET'
         })
         .then(res => res.text())

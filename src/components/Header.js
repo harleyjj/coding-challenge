@@ -7,14 +7,14 @@ export function Header(props) {
         return (
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
-                <h1 className="App-title">Welcome to React Hangman</h1>
+                <h1 className="App-title">Welcome to REACH Hangman</h1>
             </header>
         );
     }
     return (
         <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Let's Play React Hangman</h1>
+            <h1 className="App-title">Let's Play REACH Hangman</h1>
         </header>
     );
 }

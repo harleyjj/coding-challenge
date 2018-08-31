@@ -1,19 +1,48 @@
 .Letter-form {
-    float:left;
-    width:45%;
+    display: inline-block;
 }
 
 .Word-form {
-    float:right;
-    width:45%
-}
-
-.indicators {
-    padding-top:20px;
+    display: inline-block;
 }
 
 .tallies {
     float:left;
     width: 100%;
     text-align: left;
+}
+
+.btn-toolbar {
+    justify-content: center;
+}
+
+.win-pic {
+    margin-top: 20px;
+}
+
+.lose-pic {
+    margin-top: 20px;
+}
+
+.letter-tally, .win-tally {
+    border: 1px solid black;
+    border-radius: 5px;
+    background: #0077B5;
+    font-family: fantasy;
+}
+
+.word-tally, .loss-tally {
+    border: 1px solid black;
+    border-radius: 5px;
+    background: #00A0DC;
+    font-family: fantasy;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.button-part {
+    padding: 20px;
 }

@@ -54,9 +54,9 @@ export const makeGuess = guess => (dispatch, getState) => {
     const guesses = [...getState().game.guesses, guess];
     for(let i = 0; i < currentWord.length; i++){
         if(guesses.includes(currentWord[i])) {
-            displayHint += `${currentWord[i]} `;
+            displayHint += `${currentWord[i]}`;
         } else {
-            displayHint += '_ ';
+            displayHint += '_';
             missing = true;
         }
     }
@@ -93,7 +93,7 @@ export const resetGame = () => (dispatch, getState) => {
     const newWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
     let displayHint = '';
     for (let i = 0; i < newWord.length; i++) {
-        displayHint += '_ '
+        displayHint += '_'
     }
     dispatch(setWord(newWord, displayHint.trim()))
     dispatch(newGame());

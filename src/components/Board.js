@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Spinner from 'react-spinkit';
+import {Button, ButtonToolbar} from 'react-bootstrap';
 import LetterForm from './LetterForm';
 import WordForm from './WordForm';
 import {resetGame, tryAgain} from '../actions/game';
@@ -46,11 +47,15 @@ class Board extends Component {
         if (this.props.won) {
             return (
                 <div className="win">
+                    <div className="win-pic">
+                        <img src={win} className="hangman-win" alt="celebrate" />
+                    </div>
                     <div className="button-part">
                         <button onClick={()=>this.resetGame()}><strong>You win! Click to play again!</strong></button>
                     </div>
-                    <div className="win-pic">
-                        <img src={win} className="hangman-win" alt="celebrate" />
+                    <div className="tallies">
+                        <h2 className="win-tally">Wins: {this.props.wins}</h2>
+                        <h2 className="loss-tally">Losses: {this.props.losses}</h2>
                     </div>
                 </div>
             );
@@ -58,49 +63,60 @@ class Board extends Component {
         if (this.props.lost) {
             return (
                 <div className="lose">
+                    <div className="lose-pic">
+                        <img src={hangman0} className="hangman-0" alt="hangman" />
+                    </div>
                     <div className="button-part">
                         <button onClick={()=>this.resetGame()}><strong>You lost! Click to play again!</strong></button>
                     </div>
-                    <div className="win-pic">
-                        <img src={hangman0} className="hangman-0" alt="hangman" />
+                    <div className="tallies">
+                        <h2 className="win-tally">Wins: {this.props.wins}</h2>
+                        <h2 className="loss-tally">Losses: {this.props.losses}</h2>
                     </div>
                 </div>
             );
         }
         if (this.props.words.length > 1) {
 
-            console.log(this.props.guesses);
+            //console.log(this.props.guesses);
             let displayGuesses = '';
             for (let i = 0; i < this.props.guesses.length; i++){
                 displayGuesses += `${this.props.guesses[i]} `;
-                console.log(this.props.guesses[i]);
+                //console.log(this.props.guesses[i]);
             }
-            console.log(displayGuesses);
-            console.log(this.props.notAnswers);
+            //console.log(displayGuesses);
+            //console.log(this.props.notAnswers);
             let wrongAnswers = '';
             for (let i = 0; i < this.props.notAnswers.length; i++){
                 wrongAnswers += `${this.props.notAnswers[i]} `;
             }
-            console.log(this.props.currentWord);
-            console.log(this.props.gameState);
+            //console.log(this.props.currentWord);
+            //console.log(this.props.gameState);
+            let hintArray = [];
+            const buttonTypes = ['primary', 'info'];
+            for(let i = 0; i < this.props.displayHint.length; i++) {
+                hintArray.push(<Button bsStyle={buttonTypes[i % buttonTypes.length]} key={i}><h1>{this.props.displayHint[i]}</h1></Button>);
+            }
             return (
                 <div className="Play">
-                    <h1 className="Word">{this.props.displayHint}</h1>
+                    <div className="indicators">
+                        <div className="image-hangman">
+                            <img src={this.state[this.props.guessesRemaining.toString()]} className={`hangman-${this.props.guessesRemaining}`} alt="hangman" />
+                        </div>
+                        <div className="notice-of-guesses">
+                            <strong className="Guesses-left">{`You have ${this.props.guessesRemaining} chances left to guess incorrectly.`}</strong>
+                        </div>
+                    </div>
+                    <ButtonToolbar className="Word">
+                        {hintArray}
+                    </ButtonToolbar>
                     <div className="forms">
                         <LetterForm />
                         <WordForm />
                     </div>
-                    <div className="indicators">
-                        <div className="notice-of-guesses">
-                            <strong className="Guesses-left">{`You have ${this.props.guessesRemaining} chances left to guess incorrectly.`}</strong>
-                        </div>
-                        <div className="image-hangman">
-                            <img src={this.state[this.props.guessesRemaining.toString()]} className={`hangman-${this.props.guessesRemaining}`} alt="hangman" />
-                        </div>
-                    </div>
                     <div className="tallies">
-                        <h2>Letters you already guessed: {displayGuesses}</h2>
-                        <h2>These are NOT the answers: {wrongAnswers}</h2>
+                        <h2 className="letter-tally">Letters you already guessed: {displayGuesses}</h2>
+                        <h2 className="word-tally">These are NOT the answers: {wrongAnswers}</h2>
                     </div>
                 </div>
             );
@@ -134,6 +150,8 @@ const mapStateToProps = state => ({
     guessesRemaining: state.game.guessesRemaining,
     gameState: state.game,
     notAnswers: state.game.notAnswers,
+    wins: state.game.wins,
+    losses: state.game.losses,
 });
 
 export default connect(mapStateToProps)(Board);

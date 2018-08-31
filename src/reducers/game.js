@@ -18,6 +18,8 @@ const initialState = {
     displayHint: '',
     guessesRemaining: 6,
     notAnswers: [],
+    wins: 0,
+    losses: 0,
 }
 
 export default function reducer(state = initialState, action) {
@@ -49,11 +51,13 @@ export default function reducer(state = initialState, action) {
         return {
             ...state,
             lost: true,
+            losses: state.losses + 1,
         }
     } else if (action.type === WIN_GAME) {
         return {
             ...state,
             won: true,
+            wins: state.wins + 1,
         }
     } else if (action.type === NEW_GAME) {
         return {

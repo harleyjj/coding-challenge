@@ -14,7 +14,9 @@ export default class Input extends React.Component {
         return (
             <div className="form-input">
                 <label htmlFor={this.props.input.name}>
-                    {(this.props.meta.touched && this.props.meta.error) ? this.props.meta.error : this.props.label}
+                    <strong>   
+                        {(this.props.meta.touched && this.props.meta.error) ? this.props.meta.error : this.props.label}
+                    </strong>
                 </label>
                 <div>
                     <input

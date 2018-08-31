@@ -34,7 +34,7 @@ export const fetchWords = values => dispatch => {
             }
         }
     }
-    console.log(queryString);
+    //console.log(queryString);
     return (
         fetch(`https://cors-anywhere.herokuapp.com/${API_BASE_URL + queryString}`, {
             method: 'GET'
@@ -45,7 +45,7 @@ export const fetchWords = values => dispatch => {
             const firstWord = wordsArray[Math.floor(Math.random() * wordsArray.length)];
             let displayHint = '';
             for (let i = 0; i < firstWord.length; i++) {
-                displayHint += '_ '
+                displayHint += '_'
             }
             dispatch(setWord(firstWord, displayHint.trim()));
             dispatch(fetchWordsSuccess(wordsArray));

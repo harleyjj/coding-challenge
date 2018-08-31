@@ -15,10 +15,11 @@ class Game extends Component {
         if (this.props.welcome) {
             return (
                 <div className="Game">
-                    <p className="App-intro">
+                    <p className="App-intro"><strong>
                         I will choose a secret word, and you can guess letters to find 
                         the word.  If you guess 6 letters that are not in the word, you lose!
                         To get started, click the button below.  Good luck!
+                    </strong>
                     </p>
                     <StartForm />
                 </div>

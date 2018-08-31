@@ -14,7 +14,7 @@ export class StartForm extends Component {
     }
 
     onSubmit(values) {
-        console.log(values);
+        //console.log(values);
         let {minLength, maxLength} = values;
         if(minLength && maxLength) {
             if (maxLength < minLength) {
@@ -41,7 +41,7 @@ export class StartForm extends Component {
                 this.onSubmit(values)
                 )}>
                 <div className="form-input">
-                <label htmlFor="difficulty">Choose level of difficulty (Optional)</label>
+                <label htmlFor="difficulty"><strong>Choose level of difficulty (Optional)</strong></label>
                     <Field component="select" name="difficulty">
                         <option></option>
                         <option value="1">1</option>

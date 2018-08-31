@@ -26,8 +26,22 @@ class Board extends Component {
             '4': hangman4,
             '5': hangman5,
             '6': hangman6,
+            width: window.innerWidth,
         }
     }
+
+    componentWillMount() {
+        window.addEventListener('resize', this.handleWindowSizeChange);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleWindowSizeChange);
+    }
+
+    handleWindowSizeChange = () => {
+        this.setState({ width: window.innerWidth });
+    }
+
     resetGame() {
         this.props.dispatch(resetGame());
     }
@@ -54,8 +68,8 @@ class Board extends Component {
                         <button onClick={()=>this.resetGame()}><strong>You win! Click to play again!</strong></button>
                     </div>
                     <div className="tallies">
-                        <h2 className="win-tally">Wins: {this.props.wins}</h2>
-                        <h2 className="loss-tally">Losses: {this.props.losses}</h2>
+                        <h2 className="win-tally"><strong>Wins: {this.props.wins}</strong></h2>
+                        <h2 className="loss-tally"><strong>Losses: {this.props.losses}</strong></h2>
                     </div>
                 </div>
             );
@@ -70,8 +84,8 @@ class Board extends Component {
                         <button onClick={()=>this.resetGame()}><strong>You lost! Click to play again!</strong></button>
                     </div>
                     <div className="tallies">
-                        <h2 className="win-tally">Wins: {this.props.wins}</h2>
-                        <h2 className="loss-tally">Losses: {this.props.losses}</h2>
+                        <h2 className="win-tally"><strong>Wins: {this.props.wins}</strong></h2>
+                        <h2 className="loss-tally"><strong>Losses: {this.props.losses}</strong></h2>
                     </div>
                 </div>
             );
@@ -80,6 +94,7 @@ class Board extends Component {
 
             //console.log(this.props.guesses);
             let displayGuesses = '';
+            const isMobile = this.state.width <= 500;
             for (let i = 0; i < this.props.guesses.length; i++){
                 displayGuesses += `${this.props.guesses[i]} `;
                 //console.log(this.props.guesses[i]);
@@ -95,7 +110,12 @@ class Board extends Component {
             let hintArray = [];
             const buttonTypes = ['primary', 'info'];
             for(let i = 0; i < this.props.displayHint.length; i++) {
-                hintArray.push(<Button bsStyle={buttonTypes[i % buttonTypes.length]} key={i}><h1>{this.props.displayHint[i]}</h1></Button>);
+                let contents = isMobile ? this.props.displayHint[i] : <h1>{this.props.displayHint[i]}</h1>;
+                hintArray.push(<Button 
+                    bsStyle={buttonTypes[i % buttonTypes.length]}
+                    bsSize={isMobile ? "sm" : "lg"}
+                    key={i}
+                    >{contents}</Button>);
             }
             return (
                 <div className="Play">
@@ -115,8 +135,8 @@ class Board extends Component {
                         <WordForm />
                     </div>
                     <div className="tallies">
-                        <h2 className="letter-tally">Letters you already guessed: {displayGuesses}</h2>
-                        <h2 className="word-tally">These are NOT the answers: {wrongAnswers}</h2>
+                        <h2 className="letter-tally"><strong>Letters you already guessed: {displayGuesses}</strong></h2>
+                        <h2 className="word-tally"><strong>These are NOT the answers: {wrongAnswers}</strong></h2>
                     </div>
                 </div>
             );

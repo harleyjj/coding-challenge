@@ -16,19 +16,10 @@
     justify-content: center;
 }
 
-.win-pic {
-    margin-top: 20px;
-}
-
-.lose-pic {
-    margin-top: 20px;
-}
-
 .letter-tally, .win-tally {
     border: 1px solid black;
     border-radius: 5px;
     background: #0077B5;
-    font-family: fantasy;
 }
 
 button[class$="primary"] {
@@ -39,7 +30,6 @@ button[class$="primary"] {
     border: 1px solid black;
     border-radius: 5px;
     background: #00A0DC;
-    font-family: fantasy;
 }
 
 button[class$="info"] {

@@ -25,10 +25,6 @@ export class WordForm extends Component {
     }
 
     render() {
-        let notUnique;
-        if(this.state.notUnique) {
-            notUnique = <div className="message not-unique"><strong>{this.state.notUnique}</strong></div>
-        }
         return (
             <form
                 className="Word-form"
@@ -47,7 +43,7 @@ export class WordForm extends Component {
                     disabled={this.props.pristine || this.props.submitting}>
                     Guess the Answer
                 </button>
-                {notUnique}
+                <div className="message not-unique"><strong>{this.state.notUnique ? this.state.notUnique : 'REACH for the stars!'}</strong></div>
             </form>
         );
     }

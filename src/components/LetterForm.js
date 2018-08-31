@@ -27,10 +27,6 @@ export class LetterForm extends Component {
     
 
     render() {
-        let notUnique;
-        if(this.state.notUnique) {
-            notUnique = <div className="message not-unique"><strong>{this.state.notUnique}</strong></div>
-        }
         return (
             <form
                 className="Letter-form"
@@ -49,7 +45,7 @@ export class LetterForm extends Component {
                     disabled={this.props.pristine || this.props.submitting}>
                     Submit Letter Guess
                 </button>
-                {notUnique}
+                <div className="message not-unique"><strong>{this.state.notUnique ? this.state.notUnique : 'You can do it!'}</strong></div>
             </form>
         );
     }

@@ -3,6 +3,7 @@ import {Field, reduxForm, focus, reset} from 'redux-form';
 import Input from './Input';
 import {fetchWords} from '../actions/word';
 import {positiveInteger} from '../validators';
+import './StartForm.css';
 
 export class StartForm extends Component {
     constructor(props) {

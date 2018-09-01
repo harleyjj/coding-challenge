@@ -66,6 +66,8 @@ The app uses Redux, so the store is where the states are kept, with React compon
 
 ## Extensions Built
 
+* The hangman hint is displayed as a row of buttons using two shades of blue from the LinkedIn media kit.  These buttons are not tied to actions, just being used as a colorful representation of the hint.  These buttons are responsive and change size depending on the size of the window.  The game was overall styled to be usable on both mobile and pc.  
+
 * The app allows users to guess the whole word at once, with a correct answer winning automatically and an incorrect answer counting against the 6 incorrect guesses.  
 
 * A drawing of a stickman being hung progressively materializes with each incorrect guess, just like if you were playing on a real whiteboard or piece of paper.

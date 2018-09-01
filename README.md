@@ -6,7 +6,7 @@ The app is deployed [here](https://reach-hangman.herokuapp.com/)
 
 Information on the server being called can be found [here](https://github.com/harleyjj/reach-hangman-server)
 
-# How to launch application locally:
+## How to launch application locally:
 
 Clone the repo and cd into the directory where it was cloned (the project directory).
 

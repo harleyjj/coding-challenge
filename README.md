@@ -1,6 +1,6 @@
 # REACH Hangman
 
-This app implements the classic game "Hangman" using React.js.  It fetches a collection of words, which can be optionally tailored by difficulty, minimum length of letters, and/or maximum length of letters.  Then it randomly chooses one of the words for each round, giving the user 6 incorrect guesses before losing.  The guesses can be letters or full words, and duplicates are not permitted within the same submission form (i.e., if the user guessed 'a' in the letter form, s/he could also submit 'a' in the word form.  However, 'a' couldn't be submitted in the same form during the same round).  The player can keep playing rounds with new words each time, and the app will track wins/losses until the player closes or refreshes the web browser.
+This app implements the classic game "Hangman" using React.js.  It fetches a collection of words, which can be optionally tailored by difficulty, minimum length of letters, and/or maximum length of letters.  Then it randomly chooses one of the words for each round, giving the user 6 incorrect guesses before losing.  The guesses can be letters or full words, and duplicates are not permitted within the same submission form (i.e., if the user guessed 'a' in the letter form, s/he could also submit 'a' in the word form.  However, 'a' couldn't be resubmitted in the same form during the same round).  The player can keep playing rounds with new words each time, and the app will track wins/losses until the player closes or refreshes the web browser.
 
 The app is deployed [here](https://reach-hangman.herokuapp.com/)
 
@@ -18,7 +18,7 @@ Once the node modules are finished installing, run:
 
 ### `npm start`
 
-You're default web browser should launch on port 3000, at the landing page.  Alternatively, navigate to the deployed app, linked above.
+Your default web browser should launch on port 3000, at the landing page.  Alternatively, navigate to the deployed app, linked above.
 
 ## How to play:
 
@@ -32,7 +32,7 @@ You're default web browser should launch on port 3000, at the landing page.  Alt
 
 ## Folder Structure
 
-The app is organized like as follows:
+The app is organized as follows:
 
 ```
 client/
@@ -62,15 +62,15 @@ client/
     reducers/
 ```
 
-The app uses Redux, so the store is where the states are kept, with React components manipulating the state through actions, kept in the actions folder, where actions are used to update the state in reducers, kept in the reducers folder.  All react components are kept in the components folder.
+The app uses Redux, so the store is where the states are kept, with React components manipulating the state through actions - kept in the actions folder - and actions are used to update the state in reducers - kept in the reducers folder.  All React components are kept in the components folder.
 
 ## Extensions Built
 
 * The app allows users to guess the whole word at once, with a correct answer winning automatically and an incorrect answer counting against the 6 incorrect guesses.  
 
-* A drawing of the hangman progressively materializes with each incorrect guess, just like if you were playing on a real whiteboard or piece of paper.
+* A drawing of a stickman being hung progressively materializes with each incorrect guess, just like if you were playing on a real whiteboard or piece of paper.
 
-* Difficulty level, minimum letters, and maximum letters can be optionally selected on the landing page.  They modify the fetch request sent to the server.
+* Difficulty level, minimum letters, and maximum letters can be optionally selected on the landing page.  They modify the GET request sent to the server.
 
 * The game tracks wins and losses until the browser is refreshed or closed.  It does not save records in a database.
 

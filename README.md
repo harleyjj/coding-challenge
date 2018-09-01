@@ -20,7 +20,7 @@ Once the node modules are finished installing, run:
 
 You're default web browser should launch on port 3000, at the landing page.  Alternatively, navigate to the deployed app, linked above.
 
-# How to play:
+## How to play:
 
 * The landing page is where users can optionally set difficulty, minimum length of words, and maximum length of words, then start the game.
 
